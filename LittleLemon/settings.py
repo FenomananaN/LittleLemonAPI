@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'LittleLemonAPI',
 ]
 
 MIDDLEWARE = [
@@ -77,6 +79,17 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'little_lemon_db',
+    #     'USER': 'adminuser',
+    #     'PASSWORD': 'fenomanana',
+    #     'HOST': '192.168.56.101',   # use 'localhost' if same server
+    #     'PORT': '3306',
+    #     'OPTIONS': {
+    #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+    #     },
+    # }
 }
 
 
