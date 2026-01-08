@@ -3,7 +3,7 @@ from .models import MenuItem
 from .models import Category
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from .models import  Cart, Order, OrderItem
+from .models import  Cart, Order, OrderItem, Booking
 
 class CategoryTitleSerializer(serializers.ModelSerializer):
     class Meta:
@@ -127,3 +127,8 @@ class ListOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
         fields = ['user', 'menuitem', 'quantity', 'unit_price', 'price']
+
+class BookingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Booking
+        fields = ['id', 'name', 'no_of_guests', 'booking_date']

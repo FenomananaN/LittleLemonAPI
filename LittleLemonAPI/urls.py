@@ -63,4 +63,14 @@ urlpatterns=[
             'patch':'partial_update',
             'delete':'destroy',
         })),
-    ]
+
+    path('bookings/', views.BookingViewSet.as_view(
+        {
+            'get':'list',
+            'post':'create',
+        })),
+    path('bookings/<int:pk>/', views.BookingViewSet.as_view(
+        {
+            'get':'retrieve',
+        })),
+]

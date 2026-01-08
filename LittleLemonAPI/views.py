@@ -7,8 +7,8 @@ from django.contrib.auth.models import Group
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from .models import MenuItem, Category
-from .models import  Cart ,  OrderItem, Order
-from .serializers import MenuItemSerializer, ManagerSerializer, CategorySerializer , CategoryTitleSerializer
+from .models import  Cart ,  OrderItem, Order, Booking
+from .serializers import MenuItemSerializer, ManagerSerializer, CategorySerializer , CategoryTitleSerializer, BookingSerializer
 from .serializers import CartSerializer
 from django.core.paginator import Paginator, EmptyPage
 from django.contrib.auth.models import User, Group
@@ -342,3 +342,21 @@ class Orders(viewsets.ViewSet):
             queryset.delete()
 
         return Response({"Message":"Cart items deleted"}, status.HTTP_200_OK)
+    
+
+class BookingViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Booking.objects.all()
+        serialized = BookingSerializer(queryset, many=True)
+        return Response({"Bookings": serialized.data}, status=status.HTTP_200_OK)
+
+    def create(self, request):
+        serialized = BookingSerializer(data=request.data)
+        serialized.is_valid(raise_exception=True)
+        serialized.save()
+        return Response(serialized.data, status=status.HTTP_201_CREATED)
+    
+    def retrieve(self, request, pk):
+        item = get_object_or_404(Booking, pk=pk)
+        serialized_item = BookingSerializer(item)
+        return Response(serialized_item.data, status.HTTP_200_OK)

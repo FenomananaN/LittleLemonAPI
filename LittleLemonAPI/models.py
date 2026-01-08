@@ -56,3 +56,11 @@ class OrderItem(models.Model):
 
     class Meta:
         unique_together = ('user', 'menuitem')
+
+class Booking(models.Model):
+    name = models.CharField(max_length=255, db_index=True)
+    no_of_guests = models.SmallIntegerField(db_index=True)
+    booking_date = models.DateField()
+
+    def __str__(self):
+        return str(self.name)
