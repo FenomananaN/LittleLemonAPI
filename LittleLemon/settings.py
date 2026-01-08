@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'LittleLemonAPI',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_FILTER_BACKENDS': [
+    #'django_filters.rest_framework.DjangoFilterBackend',
+    'rest_framework.filters.OrderingFilter',
+    'rest_framework.filters.SearchFilter',
+    ],
+    'DEFAULT_THROTTLE_RATES':{
+        'anon':'5/minute',
+        'user':'5/minute',
+    }
+}
+
+DJOSER = {
+    'USER_ID_FIELD':'username',#to specify that primary key
+	#or 'LOGIN_FIELD':'email'
+}
